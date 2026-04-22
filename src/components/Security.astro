@@ -1,0 +1,47 @@
+---
+const items = [
+  {
+    num: "01 · Hébergement",
+    title: "Local ou serveur dédié",
+    desc: "Votre choix : sur votre propre machine, ou sur un serveur dédié que nous configurons pour vous. Aucune mutualisation, aucun cloud partagé.",
+  },
+  {
+    num: "02 · Transit",
+    title: "VPN de bout en bout",
+    desc: "Toutes les communications entre Telegram, l'agent et vos outils passent par un tunnel chiffré. Pas d'intermédiaire, pas d'écoute possible.",
+  },
+  {
+    num: "03 · Contrôle",
+    title: "Vous gardez la main",
+    desc: "Kill-switch d'un clic, journal complet des actions, validation obligatoire pour tout envoi externe. L'agent propose, vous décidez.",
+  },
+];
+---
+
+<section class="section" id="securite" aria-labelledby="security-title">
+  <div class="wrap">
+    <div class="sec-wrap">
+      <div class="section-head" style="margin-bottom: 0;">
+        <div class="section-tag">Notre différence</div>
+        <h2 id="security-title">
+          La puissance de Claude.<br />
+          <span class="accent">Chez vous. Pas ailleurs.</span>
+        </h2>
+        <p class="section-sub">
+          Nous travaillons avec les modèles Claude depuis leurs débuts.
+          L'expertise accumulée, nous la mettons au service d'une règle simple&nbsp;:
+          vos données ne quittent jamais votre périmètre.
+        </p>
+      </div>
+      <div class="sec-grid">
+        {items.map((item) => (
+          <div class="sec-item">
+            <div class="label">{item.num}</div>
+            <h4>{item.title}</h4>
+            <p>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

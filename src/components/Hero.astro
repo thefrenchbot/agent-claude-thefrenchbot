@@ -1,0 +1,82 @@
+---
+const CTA_HREF = "https://calendly.com/thefrenchbot-coaching/30min";
+---
+
+<section class="hero hero-v3" aria-label="Hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <!-- Copy -->
+      <div>
+        <span class="eyebrow">
+          <span class="dot" aria-hidden="true"></span>
+          Nouvelle offre · Places limitées
+        </span>
+        <h1>
+          Votre bras droit <span class="accent">n'a jamais dormi.</span><br />
+          Et il tient dans un fil Telegram.
+        </h1>
+        <p class="hero-sub">
+          Déléguez vos conversations et votre administratif à l'Agent Claude.
+          Installation sur-mesure, hébergement 100&nbsp;% local, accompagnement humain.
+        </p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href={CTA_HREF} target="_blank" rel="noopener noreferrer">
+            Réserver un appel découverte
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#securite">
+            Notre approche sécurité
+          </a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <strong>100&nbsp;% local</strong>
+            Données chez vous
+          </div>
+          <div class="hero-meta-item">
+            <strong>7 jours</strong>
+            De l'install à la prise en main
+          </div>
+          <div class="hero-meta-item">
+            <strong>Telegram natif</strong>
+            Pas d'app de plus
+          </div>
+        </div>
+      </div>
+      <!-- Phone preview -->
+      <div class="phone-wrap">
+        <div class="phone" role="img" aria-label="Aperçu d'une conversation avec l'Agent Claude dans Telegram">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="phone-screen">
+            <div class="tg-header">
+              <div class="tg-avatar" aria-hidden="true">C</div>
+              <div class="tg-header-info">
+                <div class="name">Agent Claude</div>
+                <div class="status">en ligne</div>
+              </div>
+            </div>
+            <div class="tg-body">
+              <div class="tg-day">aujourd'hui</div>
+              <div class="tg-msg me">
+                Réponds à Marie pour confirmer mardi 14h.
+                <span class="time">09:42<span class="check">✓✓</span></span>
+              </div>
+              <div class="tg-msg bot">
+                C'est fait. Mail envoyé, rdv ajouté à ton agenda, fiche client mise à jour.
+                <span class="time">09:42</span>
+              </div>
+              <div class="tg-msg me">
+                Parfait. Merci.
+                <span class="time">09:43<span class="check">✓✓</span></span>
+              </div>
+            </div>
+            <div class="tg-footer">
+              <div class="tg-input">Message</div>
+              <div class="tg-send" aria-hidden="true">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

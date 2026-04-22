@@ -1,0 +1,27 @@
+---
+const CTA_HREF = "https://calendly.com/thefrenchbot-coaching/30min";
+
+// Logo base64 inline (extrait du design original)
+const LOGO_B64 = "/logo.png";
+---
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/">
+      <img src={LOGO_B64} alt="The French Bot" width="36" height="36" />
+      <div class="brand-name">
+        The French Bot
+        <span class="sub">Agent Claude</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#cas">Cas d'usage</a>
+      <a href="#demo">Démo</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="nav-cta" href={CTA_HREF} target="_blank" rel="noopener noreferrer">
+      Réserver un appel →
+    </a>
+  </div>
+</nav>

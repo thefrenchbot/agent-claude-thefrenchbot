@@ -1,0 +1,110 @@
+---
+// Static demo — messages affichés sans JS (SEO-friendly)
+// L'animation JS est ajoutée progressivement
+const messages = [
+  { from: "me", text: "Prends RDV avec Thomas Leroy pour un point commercial la semaine prochaine.", time: "10:14" },
+  { from: "bot", text: "Thomas est dispo mardi 14h ou jeudi 10h. Lequel je confirme ?", time: "10:14" },
+  { from: "me", text: "Jeudi 10h. Et mets-le dans la fiche client, étape « proposition envoyée ».", time: "10:15" },
+  { from: "bot", text: "Confirmé. Invitation envoyée à Thomas, créneau bloqué dans ton agenda, fiche mise à jour. Je te fais un rappel la veille.", time: "10:15" },
+];
+---
+
+<section class="section" id="demo" aria-labelledby="demo-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Comment ça marche</div>
+      <h2 id="demo-title">
+        Une conversation.<br />
+        <span class="accent">Aucune application de plus.</span>
+      </h2>
+      <p class="section-sub">
+        Vous parlez à l'agent comme à un assistant humain, dans Telegram.
+        Il exécute sur vos outils et vous rend compte.
+      </p>
+    </div>
+    <div class="demo-wrap">
+      <!-- Copy -->
+      <div class="demo-copy">
+        <h3>Écrivez. Déléguez. Passez à autre chose.</h3>
+        <p>
+          Une instruction en langage naturel suffit. L'agent confirme,
+          demande des précisions s'il y a ambiguïté, et exécute sur vos
+          logiciels. Vous gardez le dernier mot sur ce qui sort.
+        </p>
+        <div class="demo-bullets">
+          <div class="demo-bullet">
+            <div class="demo-bullet-mark" aria-hidden="true"></div>
+            <div>Fonctionne en vocal, en texte, en photo — tout ce que Telegram accepte.</div>
+          </div>
+          <div class="demo-bullet">
+            <div class="demo-bullet-mark" aria-hidden="true"></div>
+            <div>Propose avant d'envoyer&nbsp;: rien ne part sans votre validation explicite.</div>
+          </div>
+          <div class="demo-bullet">
+            <div class="demo-bullet-mark" aria-hidden="true"></div>
+            <div>Accessible de n'importe où, en 4G, sans ouvrir votre laptop.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Phone -->
+      <div>
+        <div class="phone" role="img" aria-label="Démo d'une conversation Telegram avec l'Agent Claude">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="phone-screen">
+            <div class="tg-header">
+              <div class="tg-avatar" aria-hidden="true">C</div>
+              <div class="tg-header-info">
+                <div class="name">Agent Claude</div>
+                <div class="status" id="tg-status">en train d'écrire…</div>
+              </div>
+            </div>
+            <div class="tg-body" id="tg-messages">
+              <div class="tg-day">aujourd'hui</div>
+              {messages.map((m) => (
+                <div class={`tg-msg ${m.from}`}>
+                  {m.text}
+                  <span class="time">
+                    {m.time}
+                    {m.from === "me" && <span class="check">✓✓</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div class="tg-footer">
+              <div class="tg-input">Message</div>
+              <div class="tg-send" aria-hidden="true">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Progressive enhancement — animation de la conversation
+  const body = document.getElementById('tg-messages');
+  const status = document.getElementById('tg-status');
+  if (body && status) {
+    const allMsgs = Array.from(body.querySelectorAll('.tg-msg'));
+    // On masque tout sauf le jour, puis on rejoue
+    allMsgs.forEach(m => { (m as HTMLElement).style.display = 'none'; });
+    let i = 0;
+    const show = () => {
+      if (i < allMsgs.length) {
+        (allMsgs[i] as HTMLElement).style.display = '';
+        i++;
+        setTimeout(show, i % 2 === 0 ? 1200 : 1800);
+      } else {
+        status.textContent = 'en ligne';
+        setTimeout(() => {
+          allMsgs.forEach(m => { (m as HTMLElement).style.display = 'none'; });
+          i = 0;
+          status.textContent = 'en train d\'écrire…';
+          setTimeout(show, 1000);
+        }, 4000);
+      }
+    };
+    setTimeout(show, 800);
+  }
+</script>

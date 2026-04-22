@@ -1,0 +1,132 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title = "Agent Claude · The French Bot — Votre bras droit IA sur Telegram",
+  description = "Déléguez vos conversations, vos mails, votre agenda et votre CRM à l'Agent Claude. Installation sur-mesure pour indépendants et petites sociétés. 100% local, sécurisé, opérationnel en 7 jours.",
+  ogImage = "/og.png",
+  canonical = "https://agent-claude.thefrenchbot.com",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="The French Bot" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="The French Bot" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts — preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zilla+Slab:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data — LocalBusiness + SoftwareApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "The French Bot",
+            "url": "https://thefrenchbot.com",
+            "logo": "https://agent-claude.thefrenchbot.com/logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "contact@thefrenchbot.com",
+              "contactType": "customer support",
+              "availableLanguage": "French"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Agent Claude",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Telegram",
+            "description": "Agent IA autonome qui gère vos mails, agenda et CRM depuis Telegram. Installation sur-mesure, 100% local.",
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/LimitedAvailability",
+              "seller": {
+                "@type": "Organization",
+                "name": "The French Bot"
+              }
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Comment fonctionne l'Agent Claude ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "L'Agent Claude est un assistant IA installé directement dans votre Telegram. Vous lui donnez des instructions en langage naturel, il agit sur vos outils (mail, agenda, CRM) et vous rend compte. Rien ne part sans votre validation."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Mes données sont-elles sécurisées ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Oui. Tout est hébergé localement chez vous ou sur un serveur dédié. Toutes les communications transitent via VPN. Aucune donnée mutualisée."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "En combien de temps est-ce installé ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "7 jours de la première réunion à la remise en main propre. Configuration, tests, formation inclus."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Pour qui est fait l'Agent Claude ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pour les indépendants, consultants et dirigeants de petites structures qui veulent déléguer leur administratif sans sacrifier la confidentialité de leurs données."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

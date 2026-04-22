@@ -1,0 +1,52 @@
+---
+const cases = [
+  {
+    num: "01",
+    title: "Vos mails, gérés",
+    desc: "L'agent lit, trie, priorise. Il rédige les réponses dans votre ton, vous les soumet, et envoie quand vous validez. Plus de boîte de réception qui déborde le lundi matin.",
+    tags: ["Tri intelligent", "Brouillons", "Relances auto", "Résumés"],
+  },
+  {
+    num: "02",
+    title: "Votre agenda, orchestré",
+    desc: "Prise de rendez-vous, confirmations, rappels, créneaux protégés pour le travail de fond. L'agent négocie les créneaux avec vos clients à votre place.",
+    tags: ["Prise de RDV", "Rappels", "Créneaux protégés", "Sync calendrier"],
+  },
+  {
+    num: "03",
+    title: "Votre CRM, à jour",
+    desc: "Chaque échange enrichit la fiche client automatiquement. Notes d'appel, historique, pipeline, relances. Votre base devient vivante, sans saisie manuelle.",
+    tags: ["Fiches clients", "Pipeline", "Relances", "Notes d'appel"],
+  },
+];
+---
+
+<section class="section" id="cas" aria-labelledby="cases-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Ce qu'il fait</div>
+      <h2 id="cases-title">
+        Trois chantiers du quotidien,<br />
+        <span class="accent">pris en charge.</span>
+      </h2>
+      <p class="section-sub">
+        L'Agent Claude n'est pas un chatbot générique. Il est configuré pour votre
+        activité, avec vos outils, vos contacts et votre manière de parler.
+      </p>
+    </div>
+    <div class="cases">
+      {cases.map((c) => (
+        <article class="case">
+          <div class="case-num">— {c.num}</div>
+          <h3>{c.title}</h3>
+          <p>{c.desc}</p>
+          <div class="case-tags">
+            {c.tags.map((t) => (
+              <span class="case-tag">{t}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

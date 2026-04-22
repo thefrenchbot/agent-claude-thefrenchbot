@@ -1,0 +1,76 @@
+---
+const faqs = [
+  {
+    q: "Pour qui est fait l'Agent Claude ?",
+    a: "Pour les indépendants, consultants, freelances et dirigeants de TPE qui passent trop de temps sur leur administratif. Si vous gérez seul(e) vos mails, votre agenda et vos clients, l'Agent Claude est fait pour vous.",
+  },
+  {
+    q: "Comment fonctionne concrètement l'agent ?",
+    a: "Vous envoyez un message dans Telegram — texte, vocal ou photo. L'agent comprend votre instruction, agit sur vos outils (Gmail, Google Calendar, HubSpot, Notion…) et vous confirme ce qu'il a fait. Rien ne part sans que vous validiez.",
+  },
+  {
+    q: "Mes données sont-elles vraiment sécurisées ?",
+    a: "Oui. L'agent tourne sur votre machine ou un serveur dédié. Toutes les communications passent par VPN. Aucune donnée ne transite par des serveurs mutualisés. Vous avez un journal complet de toutes les actions effectuées.",
+  },
+  {
+    q: "En combien de temps est-ce opérationnel ?",
+    a: "7 jours ouvrés de la première réunion à la remise en main propre : installation, configuration, connexion de vos outils, tests, et formation. Vous repartez autonome.",
+  },
+  {
+    q: "Quels outils peut-il connecter ?",
+    a: "Gmail / Outlook, Google Calendar, HubSpot, Notion, Airtable, Slack, et plus encore. Nous auditons vos outils actuels lors de l'appel de découverte et configurons les connecteurs adaptés.",
+  },
+  {
+    q: "Quels sont les tarifs ?",
+    a: "Chaque installation est sur-mesure. Les tarifs dépendent de la complexité de votre stack et du niveau d'automatisation souhaité. Tout se discute lors de l'appel de 30 minutes — sans engagement.",
+  },
+];
+---
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Questions fréquentes</div>
+      <h2 id="faq-title">
+        Tout ce que vous voulez<br />
+        <span class="accent">savoir avant d'appeler.</span>
+      </h2>
+    </div>
+    <div class="faq-list" role="list">
+      {faqs.map((item, i) => (
+        <div class="faq-item" role="listitem" id={`faq-${i}`}>
+          <button
+            class="faq-q"
+            aria-expanded="false"
+            aria-controls={`faq-a-${i}`}
+          >
+            {item.q}
+            <span class="icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id={`faq-a-${i}`} role="region">
+            {item.a}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item')!;
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+      });
+      // Toggle clicked
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
