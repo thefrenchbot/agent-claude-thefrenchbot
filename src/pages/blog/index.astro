@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../../src/styles/global.css';
+
+const posts = [
+  {
+    slug: "claude-code-creer-site-internet",
+    title: "Claude Code peut-il vraiment créer votre site internet ? La vérité sans filtre",
+    description: "Après avoir accompagné des dizaines d'entreprises avec Claude Code, voilà la réalité terrain — ce que l'IA peut vraiment faire, ce qu'elle ne peut pas faire, et comment ne pas se planter.",
+    pubDate: "2026-05-21",
+  }
+];
+---
+
+<Layout
+  title="Blog · The French Bot — Décryptages IA pour TPE et PME"
+  description="Chaque semaine, Julian Luneau décrypte l'IA pour les dirigeants et indépendants. Cas concrets, méthodes, retours d'expérience terrain."
+  canonical="https://agent-claude.thefrenchbot.com/blog"
+>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <main>
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="The French Bot" width="36" height="36" />
+          <div class="brand-name">
+            The French Bot
+            <span class="sub">Agent Claude</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="/#cas">Cas d'usage</a>
+          <a href="/#demo">Démo</a>
+          <a href="/blog" class="active">Blog</a>
+        </div>
+        <a class="nav-cta" href="https://calendly.com/thefrenchbot-coaching/30min" target="_blank" rel="noopener noreferrer">
+          Réserver un appel →
+        </a>
+      </div>
+    </nav>
+
+    <section class="blog-index">
+      <div class="wrap">
+        <header class="blog-header">
+          <h1>Blog</h1>
+          <p class="blog-intro">Décryptages IA pour dirigeants et indépendants. Du terrain, pas de la théorie.</p>
+        </header>
+
+        <div class="posts-grid">
+          {posts.map(post => (
+            <a href={`/blog/${post.slug}`} class="post-card">
+              <time class="post-date" datetime={post.pubDate}>
+                {new Date(post.pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>
+              <h2 class="post-title">{post.title}</h2>
+              <p class="post-excerpt">{post.description}</p>
+              <span class="post-cta">Lire l'article →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main { position: relative; z-index: 2; }
+
+  .blog-index {
+    padding: 80px 0 120px;
+  }
+
+  .blog-header {
+    margin-bottom: 60px;
+  }
+  .blog-header h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .blog-intro {
+    font-size: 18px;
+    color: var(--ink-dim);
+  }
+
+  .posts-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .post-card {
+    display: block;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    max-width: 760px;
+  }
+  .post-card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+
+  .post-date {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .post-title {
+    font-size: clamp(20px, 3vw, 26px);
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .post-excerpt {
+    font-size: 15px;
+    color: var(--ink-dim);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .post-cta {
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Reuse nav styles from global */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,10,20,0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 64px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .brand img { border-radius: 8px; }
+  .brand-name {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.1;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-name .sub {
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    margin-left: auto;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-dim);
+    transition: color 0.18s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    background: var(--grad);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    transition: opacity 0.18s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .post-card { padding: 28px 24px; }
+  }
+</style>

@@ -1,0 +1,480 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: string;
+  slug: string;
+}
+
+const { title, description, pubDate, slug } = Astro.props;
+const canonical = `https://agent-claude.thefrenchbot.com/blog/${slug}`;
+const CTA_HREF = "https://calendly.com/thefrenchbot-coaching/30min";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title} · The French Bot</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Julian Luneau — The French Bot" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="The French Bot" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zilla+Slab:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "description": description,
+        "datePublished": pubDate,
+        "author": {
+          "@type": "Person",
+          "name": "Julian Luneau",
+          "url": "https://thefrenchbot.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The French Bot",
+          "url": "https://thefrenchbot.com"
+        }
+      })}
+    </script>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="/">
+          <img src="/logo.png" alt="The French Bot" width="36" height="36" />
+          <div class="brand-name">
+            The French Bot
+            <span class="sub">Agent Claude</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="/#cas">Cas d'usage</a>
+          <a href="/#demo">Démo</a>
+          <a href="/blog">Blog</a>
+        </div>
+        <a class="nav-cta" href={CTA_HREF} target="_blank" rel="noopener noreferrer">
+          Réserver un appel →
+        </a>
+      </div>
+    </nav>
+
+    <main class="blog-main">
+      <div class="wrap blog-wrap">
+        <a href="/blog" class="back-link">← Retour au blog</a>
+
+        <article class="article">
+          <header class="article-header">
+            <time class="article-date" datetime={pubDate}>
+              {new Date(pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </time>
+            <h1 class="article-title">{title}</h1>
+            <p class="article-lead">{description}</p>
+          </header>
+
+          <div class="article-body prose">
+            <slot />
+          </div>
+
+          <footer class="article-footer">
+            <div class="author-card">
+              <img src="/logo.png" alt="Julian Luneau" width="48" height="48" class="author-avatar" />
+              <div>
+                <div class="author-name">Julian Luneau</div>
+                <div class="author-role">The French Bot — Formation IA pour TPE, PME et indépendants · Dijon</div>
+              </div>
+            </div>
+            <a class="btn-cta" href={CTA_HREF} target="_blank" rel="noopener noreferrer">
+              Réserver 30 min avec Julian →
+            </a>
+          </footer>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer-inner">
+        <span>© {new Date().getFullYear()} The French Bot</span>
+        <a href="/mentions-legales">Mentions légales</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zilla+Slab:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0B0A14;
+    --bg-soft: #11101c;
+    --bg-elev: #15142266;
+    --ink: #F2F1F7;
+    --ink-dim: #A8A6BD;
+    --ink-mute: #6E6C85;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.14);
+    --brand-a: #3524E8;
+    --brand-b: #E93BF3;
+    --grad: linear-gradient(92deg, #3524E8 0%, #E93BF3 100%);
+    --grad-soft: linear-gradient(92deg, rgba(53,36,232,0.22) 0%, rgba(233,59,243,0.22) 100%);
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --maxw: 1200px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4, .slab {
+    font-family: 'Zilla Slab', 'Roboto Slab', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  .ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .ambient::before,
+  .ambient::after {
+    content: "";
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.28;
+  }
+  .ambient::before {
+    top: -350px;
+    left: -250px;
+    background: radial-gradient(circle, #3524E8 0%, transparent 60%);
+  }
+  .ambient::after {
+    top: 20%;
+    right: -300px;
+    background: radial-gradient(circle, #E93BF3 0%, transparent 60%);
+    opacity: 0.18;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,10,20,0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 64px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .brand img { border-radius: 8px; }
+  .brand-name {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.1;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-name .sub {
+    font-size: 11px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    margin-left: auto;
+  }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-dim);
+    transition: color 0.18s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    background: var(--grad);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    transition: opacity 0.18s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* BLOG MAIN */
+  .blog-main {
+    position: relative;
+    z-index: 2;
+    padding: 60px 0 100px;
+  }
+  .blog-wrap {
+    max-width: 760px;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-bottom: 40px;
+    transition: color 0.18s;
+  }
+  .back-link:hover { color: var(--ink-dim); }
+
+  /* ARTICLE HEADER */
+  .article-header {
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .article-date {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .article-title {
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .article-lead {
+    font-size: 18px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+
+  /* PROSE */
+  .prose {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-dim);
+  }
+  .prose h2 {
+    font-family: 'Zilla Slab', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    color: var(--ink);
+    margin: 56px 0 20px;
+    padding-top: 8px;
+  }
+  .prose h3 {
+    font-family: 'Zilla Slab', serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    color: var(--ink);
+    margin: 36px 0 14px;
+  }
+  .prose p {
+    margin-bottom: 20px;
+  }
+  .prose strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose a {
+    color: #a78bfa;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose a:hover { color: var(--ink); }
+  .prose ul, .prose ol {
+    padding-left: 24px;
+    margin-bottom: 20px;
+  }
+  .prose li {
+    margin-bottom: 8px;
+  }
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .prose blockquote {
+    border-left: 3px solid var(--brand-a);
+    margin: 0 0 20px;
+    padding: 16px 24px;
+    background: var(--bg-elev);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .prose em {
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+  .prose code {
+    font-family: 'Courier New', monospace;
+    background: rgba(255,255,255,0.07);
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #c4b5fd;
+  }
+
+  /* IMAGE PLACEHOLDER */
+  .prose p:has(> em:only-child) {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    color: var(--ink-mute);
+    font-style: normal;
+  }
+
+  /* ARTICLE FOOTER */
+  .article-footer {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .author-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .author-avatar {
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .author-role {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-top: 3px;
+  }
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    background: var(--grad);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.18s;
+    align-self: flex-start;
+  }
+  .btn-cta:hover { opacity: 0.88; }
+
+  /* SITE FOOTER */
+  .site-footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid var(--line);
+    padding: 24px 0;
+  }
+  .site-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  .site-footer-inner a:hover { color: var(--ink-dim); }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .wrap { padding: 0 20px; }
+    .blog-main { padding: 40px 0 80px; }
+    .back-link { margin-bottom: 28px; }
+  }
+</style>
